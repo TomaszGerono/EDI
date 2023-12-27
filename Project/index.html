@@ -196,11 +196,11 @@
 		xmlhttp.send();
 
 		function myFunction(arr) {
-		  var out = "<thead class=\"thead-dark\"><tr><th>First Name</th><th>Last Name</th><th>City</th></tr></thead>";
+		  var out = "<thead class=\"thead-dark\"><tr><th>First Name</th><th>Last Name</th><th>Gender</th></tr></thead>";
 		  var i;
 		  out += '<tbody>';
 		  for(i = 0; i < arr.length; i++) {
-			out += '<tr><td>' + arr[i].first_name + '</td><td>' + arr[i].last_name + '</td><td>' + arr[i].city + '</td></tr>';
+			out += '<tr><td>' + arr[i].first_name + '</td><td>' + arr[i].last_name + '</td><td>' + arr[i].gender + '</td></tr>';
 		  }
 		  out += '</tbody>';
 		  document.getElementById("list").innerHTML = out;
