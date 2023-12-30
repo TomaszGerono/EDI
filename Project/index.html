@@ -184,7 +184,7 @@
 		<!-- below sample taken from the page: https://www.w3schools.com/js/js_json_http.asp and adjusted to our needs -->
 		<script>
 		var xmlhttp = new XMLHttpRequest();
-		var url = "https://my.api.mockaroo.com/users.json?key=1a3c69b0";
+		var url = "https://my.api.mockaroo.com/movie_plat.json?key=d9e33290";
 
 		xmlhttp.onreadystatechange = function() {
 		  if (this.readyState == 4 && this.status == 200) {
@@ -200,7 +200,7 @@
 		  var i;
 		  out += '<tbody>';
 		  for(i = 0; i < arr.length; i++) {
-			out += '<tr><td>' + arr[i].first_name + '</td><td>' + arr[i].last_name + '</td><td>' + arr[i].gender + '</td></tr>';
+			out += '<tr><td>' + arr[i].User + '</td><td>' + arr[i].movie + '</td><td>' + arr[i].Genre + '</td><td>' + arr[i].Country + '</td><td>' + arr[i].Rating + '</td></tr>';
 		  }
 		  out += '</tbody>';
 		  document.getElementById("list").innerHTML = out;
