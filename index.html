@@ -178,7 +178,9 @@
 		<!-- below sample taken from the page: https://www.w3schools.com/js/js_json_http.asp and adjusted to our needs -->
 		<script>
 		var xmlhttp = new XMLHttpRequest();
-		var url = "https://my.api.mockaroo.com/movie_plat.json?key=d9e33290";
+		var url = "https://my.api.mockaroo.com/movies.json?key=1a3c69b0";
+		//changing temporarily because mockaroo allows 200 requests a day
+		//var url = "https://my.api.mockaroo.com/movie_plat.json?key=d9e33290";
 
 		xmlhttp.onreadystatechange = function() {
 		  if (this.readyState == 4 && this.status == 200) {
@@ -199,7 +201,7 @@
 		  out += '</tbody>';
 		  document.getElementById("list").innerHTML = out;
 		  
-		// Charts
+		// Chart 1
 		const country = [];
 		const average_rating = [];
         for (i = 0; i < arr.length; i++) {
@@ -264,23 +266,42 @@
         config
         );
 
-	  const ctx2 = document.getElementById('myChart2');
+		// Chart 2
+		const movie = [];
+		const movie_rating = [];
+        for (i = 0; i < arr.length; i++) {
+			if(arr[i].Rating > 4 && movie.length < 10) {
+				var movie_exists = false;
+				for(j = 0; j < movie.length; j++) {
+					if(movie[j].localeCompare(arr[i].Movie) == 0) movie_exists = true;					
+				}
+				if(!movie_exists) {
+					movie.push(arr[i].Movie);
+					movie_rating.push(arr[i].Rating);
+				} 
+								
+			}
+        }
+		console.log(movie);
+		console.log(movie_rating);
 
-	  new Chart(ctx2, {
-		type: 'pie',
-		data: {
-		  labels: ['Falling Down', 'Guardian', 'Two Bits', 'Baader Meinhof Komplex', 'Beauty in Trouble', 'Early Years: Erik Nietzsche Part 1'],
+	   const ctx2 = document.getElementById('myChart2');
+
+	   new Chart(ctx2, {
+		 type: 'pie',
+		 data: {
+		  labels: movie,
 		  datasets: [{
       backgroundColor: [
-            'rgba(255, 255, 255, 0.8)',
+            'rgba(228, 225, 137, 0.8)',
             'rgba(0, 0, 0, 0.8)',
             'rgba(142, 0, 0, 0.8)',
             'rgba(142, 225, 137, 0.8)',
             'rgba(228, 225, 137, 0.8)',
             'rgba(78, 114, 226, 0.96)',
             ],
-			label: '# of Votes',
-			data: [5, 4.95, 4.9, 4.89, 4.85, 4.83],
+			label: 'Highest Vote',
+			data: movie_rating,
 			borderWidth: 3
 		  }]
 		},
@@ -293,10 +314,6 @@
         },		  
 		}
 	  });
-
-        // Instantly assign Chart.js version
-        //const chartVersion = document.getElementById('chartVersion');
-        //chartVersion.innerText = Chart.version;
 
 		}
 						
@@ -339,35 +356,6 @@
 	<div>
 	  <canvas id="myChart2"></canvas>
 	</div>
-
-
-<div>
-  <canvas id="myChart3"></canvas>
-</div>
-
-<script>
-  const ctx3 = document.getElementById('myChart3');
-
-  new Chart(ctx3, {
-  type: 'doughnut',
-  data: {
-    labels: ['Estonia', 'East Timor', 'Malta', 'Armenia', 'United Kingdom', 'Guam'],
-    datasets: [{
-    label: '# of Votes',
-    data: [4.93, 4.78, 4.69, 4.69, 4.69, 4.68],
-    borderWidth: 3
-    }]
-  },
-  options: {
-    plugins: {
-          title: {
-              display: true,
-              text: 'Countries Rate Average'
-          }
-      },		  
-  }
-  });
-</script>
 
       </div>
     </div>
